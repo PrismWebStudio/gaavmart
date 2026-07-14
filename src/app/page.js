@@ -103,7 +103,7 @@ export default function Home() {
 
       <section className="hero">
         <div>
-          <h1>Gaav<br /><span>Mart</span></h1>
+          <h1>Gaav<span>Mart</span></h1>
           <p>Fresh, Natural & Pure Organic Products</p>
           <a className="btn" href="#">Shop Now →</a>
         </div>
