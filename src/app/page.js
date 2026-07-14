@@ -108,9 +108,9 @@ export default function Home() {
       </div>
 
       <section className="hero">
-        <div className="hero-content">
-          <h1>Live Organic<br/><span>Live Healthy</span></h1>
-          <p>Pure. Natural. You.</p>
+        <div>
+          <h1>Gaav<span>Mart</span></h1>
+          <p>Fresh, Natural & Pure Organic Products</p>
           <a className="btn" href="#">Shop Now →</a>
         </div>
         <img src="https://i.ibb.co/ZzhmRqYx/image-removebg-preview.png" alt="Gaav Mart Organic Fresh Grocery Products" />
@@ -118,27 +118,31 @@ export default function Home() {
 
       <section className="features">
         <div className="feature">
-          <div className="feature-icon"><i className="ph ph-leaf"></i></div>
-          <p>100%<br/>Organic</p>
+          🌱
+          <h3>100% Organic</h3>
+          <p>Natural farming products</p>
         </div>
         <div className="feature">
-          <div className="feature-icon"><i className="ph ph-plant"></i></div>
-          <p>Fresh &<br/>Natural</p>
+          🍃
+          <h3>Fresh & Natural</h3>
+          <p>Healthy daily food</p>
         </div>
         <div className="feature">
-          <div className="feature-icon"><i className="ph ph-truck"></i></div>
-          <p>Free Delivery<br/><span>Above ₹499</span></p>
+          🚚
+          <h3>Fast Delivery</h3>
+          <p>Quick home delivery</p>
         </div>
         <div className="feature">
-          <div className="feature-icon"><i className="ph ph-shield-check"></i></div>
-          <p>Secure<br/>Payment</p>
+          ✔
+          <h3>Secure Payment</h3>
+          <p>Easy checkout</p>
         </div>
       </section>
 
       <section className="section">
         <div className="title">
-          <h2>Shop by Category</h2>
-          <a href="#" className="view-all">View All</a>
+          <h2>Shop By Category</h2>
+          <a href="#" className="view-all mobile-only">View All</a>
         </div>
         <div className="categories">
           {categories.map(cat => (
@@ -147,7 +151,7 @@ export default function Home() {
               className={`category ${activeCategory === cat.id ? 'active' : ''}`}
               onClick={() => handleCategoryClick(cat.id)}
             >
-              <div className="cat-img-wrap"><img src={cat.image} alt={cat.name} /></div>
+              <img src={cat.image} alt={cat.name} />
               <h4>{cat.name}</h4>
             </div>
           ))}
@@ -161,24 +165,20 @@ export default function Home() {
               ? `${categories.find(c => c.id === activeCategory)?.name || ''} Products` 
               : 'Best Selling Products'}
           </h2>
-          <a href="#" className="view-all">View All</a>
+          <a href="#" className="view-all mobile-only">View All</a>
         </div>
         <div className="products">
           {products.map(product => {
             const cartItem = cart.find(item => item.id === product.id);
-            const mrp = product.price + Math.floor(product.price * 0.2);
             return (
               <div className="card" key={product.id}>
                 <img src={product.image} alt={product.name} />
                 <h3>{product.name}</h3>
                 <p>{product.weight}</p>
                 <div className="price-container">
-                  <div className="price-info">
-                    <span className="price">₹{product.price}</span>
-                    <span className="mrp">₹{mrp}</span>
-                  </div>
+                  <div className="price">₹{product.price}</div>
                   {!cartItem ? (
-                    <button className="buy" onClick={() => addToCart(product)}><i className="ph ph-plus"></i></button>
+                    <button className="buy" onClick={() => addToCart(product)}>+</button>
                   ) : (
                     <div className="qty-control">
                       <button className="qty-btn" onClick={() => updateQuantity(product.id, -1)}>-</button>
