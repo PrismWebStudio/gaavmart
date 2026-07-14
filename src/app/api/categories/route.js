@@ -10,8 +10,9 @@ const categories = [
 
 export async function GET() {
   const optimizedCategories = categories.map(c => {
-    if (c.image.includes('unsplash.com') && !c.image.includes('?')) {
-      return { ...c, image: c.image + '?auto=format&fit=crop&w=400&q=80' };
+    if (c.image.includes('unsplash.com')) {
+      const cleanUrl = c.image.split('?')[0];
+      return { ...c, image: `https://wsrv.nl/?url=${cleanUrl.replace('https://', '')}&w=400&h=300&fit=cover` };
     }
     return c;
   });
