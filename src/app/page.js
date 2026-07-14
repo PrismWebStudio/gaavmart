@@ -85,26 +85,32 @@ export default function Home() {
   return (
     <>
       <header>
+        <button className="menu-btn mobile-only"><i className="ph ph-list"></i></button>
         <Link href="/" className="logo">
           <img className="logo-img" src="https://i.ibb.co/r2Lnw8pq/bac70c43-ddd2-4ce1-8eb7-ec417122b244.png" alt="Gaav Mart Logo" />
           Gaav <span>Mart</span>
         </Link>
-        <nav>
+        <nav className="desktop-nav">
           <a href="#">Home</a>
           <a href="#">Shop</a>
           <a href="#">Products</a>
           <a href="#">Contact</a>
-          <button className="cart-icon" onClick={() => setIsCartOpen(true)}>
-            <i className="ph ph-shopping-cart"></i>
-            {cartItemsCount > 0 && <span className="cart-badge">{cartItemsCount}</span>}
-          </button>
         </nav>
+        <button className="cart-icon" onClick={() => setIsCartOpen(true)}>
+          <i className="ph ph-shopping-cart"></i>
+          {cartItemsCount > 0 && <span className="cart-badge">{cartItemsCount}</span>}
+        </button>
       </header>
 
+      <div className="mobile-search mobile-only">
+        <i className="ph ph-magnifying-glass search-icon"></i>
+        <input type="text" placeholder="Search for organic products..." />
+      </div>
+
       <section className="hero">
-        <div>
-          <h1>Gaav<span>Mart</span></h1>
-          <p>Fresh, Natural & Pure Organic Products</p>
+        <div className="hero-content">
+          <h1>Live Organic<br/><span>Live Healthy</span></h1>
+          <p>Pure. Natural. You.</p>
           <a className="btn" href="#">Shop Now →</a>
         </div>
         <img src="https://i.ibb.co/ZzhmRqYx/image-removebg-preview.png" alt="Gaav Mart Organic Fresh Grocery Products" />
@@ -112,30 +118,27 @@ export default function Home() {
 
       <section className="features">
         <div className="feature">
-          🌱
-          <h3>100% Organic</h3>
-          <p>Natural farming products</p>
+          <div className="feature-icon"><i className="ph ph-leaf"></i></div>
+          <p>100%<br/>Organic</p>
         </div>
         <div className="feature">
-          🍃
-          <h3>Fresh & Natural</h3>
-          <p>Healthy daily food</p>
+          <div className="feature-icon"><i className="ph ph-plant"></i></div>
+          <p>Fresh &<br/>Natural</p>
         </div>
         <div className="feature">
-          🚚
-          <h3>Fast Delivery</h3>
-          <p>Quick home delivery</p>
+          <div className="feature-icon"><i className="ph ph-truck"></i></div>
+          <p>Free Delivery<br/><span>Above ₹499</span></p>
         </div>
         <div className="feature">
-          ✔
-          <h3>Secure Payment</h3>
-          <p>Easy checkout</p>
+          <div className="feature-icon"><i className="ph ph-shield-check"></i></div>
+          <p>Secure<br/>Payment</p>
         </div>
       </section>
 
       <section className="section">
         <div className="title">
-          <h2>Shop By Category</h2>
+          <h2>Shop by Category</h2>
+          <a href="#" className="view-all">View All</a>
         </div>
         <div className="categories">
           {categories.map(cat => (
@@ -144,7 +147,7 @@ export default function Home() {
               className={`category ${activeCategory === cat.id ? 'active' : ''}`}
               onClick={() => handleCategoryClick(cat.id)}
             >
-              <img src={cat.image} alt={cat.name} />
+              <div className="cat-img-wrap"><img src={cat.image} alt={cat.name} /></div>
               <h4>{cat.name}</h4>
             </div>
           ))}
@@ -158,19 +161,24 @@ export default function Home() {
               ? `${categories.find(c => c.id === activeCategory)?.name || ''} Products` 
               : 'Best Selling Products'}
           </h2>
+          <a href="#" className="view-all">View All</a>
         </div>
         <div className="products">
           {products.map(product => {
             const cartItem = cart.find(item => item.id === product.id);
+            const mrp = product.price + Math.floor(product.price * 0.2);
             return (
               <div className="card" key={product.id}>
                 <img src={product.image} alt={product.name} />
                 <h3>{product.name}</h3>
                 <p>{product.weight}</p>
                 <div className="price-container">
-                  <div className="price">₹{product.price}</div>
+                  <div className="price-info">
+                    <span className="price">₹{product.price}</span>
+                    <span className="mrp">₹{mrp}</span>
+                  </div>
                   {!cartItem ? (
-                    <button className="buy" onClick={() => addToCart(product)}>+</button>
+                    <button className="buy" onClick={() => addToCart(product)}><i className="ph ph-plus"></i></button>
                   ) : (
                     <div className="qty-control">
                       <button className="qty-btn" onClick={() => updateQuantity(product.id, -1)}>-</button>
@@ -184,6 +192,14 @@ export default function Home() {
           })}
         </div>
       </section>
+
+      <nav className="bottom-nav mobile-only">
+        <a href="#" className="active"><i className="ph-fill ph-house"></i><span>Home</span></a>
+        <a href="#"><i className="ph ph-squares-four"></i><span>Categories</span></a>
+        <a href="#"><i className="ph ph-magnifying-glass"></i><span>Search</span></a>
+        <a href="#"><i className="ph ph-shopping-bag"></i><span>Orders</span></a>
+        <a href="#"><i className="ph ph-user"></i><span>Profile</span></a>
+      </nav>
 
       <footer>
         © 2026 Gaav Mart | Fresh & Healthy Living
