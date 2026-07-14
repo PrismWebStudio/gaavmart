@@ -84,8 +84,7 @@ export default function Home() {
 
   return (
     <>
-      <header>
-        <button className="menu-btn mobile-only"><i className="ph ph-list"></i></button>
+      <header className="desktop-header">
         <Link href="/" className="logo">
           <img className="logo-img" src="https://i.ibb.co/r2Lnw8pq/bac70c43-ddd2-4ce1-8eb7-ec417122b244.png" alt="Gaav Mart Logo" />
           Gaav <span>Mart</span>
@@ -102,40 +101,51 @@ export default function Home() {
         </button>
       </header>
 
+      <header className="mobile-header mobile-only">
+        <button className="menu-btn"><i className="ph ph-list"></i></button>
+        <div className="logo-center">
+          <img className="logo-img" src="https://i.ibb.co/r2Lnw8pq/bac70c43-ddd2-4ce1-8eb7-ec417122b244.png" alt="Gaav Mart Logo" />
+          <div className="logo-text">
+            <div className="title-text">Gaav<span>Mart</span></div>
+            <div className="tagline">— Every need, to your village —</div>
+          </div>
+        </div>
+        <button className="cart-icon" onClick={() => setIsCartOpen(true)}>
+          <i className="ph ph-shopping-cart"></i>
+          {cartItemsCount > 0 && <span className="cart-badge">{cartItemsCount}</span>}
+        </button>
+      </header>
+
       <div className="mobile-search mobile-only">
+        <input type="text" placeholder="Search for products on GaavMart..." />
         <i className="ph ph-magnifying-glass search-icon"></i>
-        <input type="text" placeholder="Search for organic products..." />
       </div>
 
       <section className="hero">
-        <div>
-          <h1>Gaav<span>Mart</span></h1>
-          <p>Fresh, Natural & Pure Organic Products</p>
+        <div className="hero-content">
+          <h1>The Village's Own<br/><span>Online Store</span></h1>
+          <p>Fresh • Affordable • Reliable</p>
           <a className="btn" href="#">Shop Now →</a>
         </div>
-        <img src="https://i.ibb.co/ZzhmRqYx/image-removebg-preview.png" alt="Gaav Mart Organic Fresh Grocery Products" />
+        <img src="https://i.ibb.co/ZzhmRqYx/image-removebg-preview.png" alt="Gaav Mart Organic Fresh Grocery Products" className="hero-basket" />
       </section>
 
       <section className="features">
         <div className="feature">
-          🌱
-          <h3>100% Organic</h3>
-          <p>Natural farming products</p>
+          <div className="feature-icon"><i className="ph-fill ph-leaf"></i></div>
+          <p>100%<br/><span>Fresh & Natural</span></p>
         </div>
         <div className="feature">
-          🍃
-          <h3>Fresh & Natural</h3>
-          <p>Healthy daily food</p>
+          <div className="feature-icon"><i className="ph-fill ph-plant"></i></div>
+          <p>Farm Fresh<br/><span>Products</span></p>
         </div>
         <div className="feature">
-          🚚
-          <h3>Fast Delivery</h3>
-          <p>Quick home delivery</p>
+          <div className="feature-icon"><i className="ph-fill ph-truck"></i></div>
+          <p>Free Delivery<br/><span>Above ₹499</span></p>
         </div>
         <div className="feature">
-          ✔
-          <h3>Secure Payment</h3>
-          <p>Easy checkout</p>
+          <div className="feature-icon"><i className="ph-fill ph-shield-check"></i></div>
+          <p>Secure<br/><span>Payment</span></p>
         </div>
       </section>
 
@@ -151,7 +161,13 @@ export default function Home() {
               className={`category ${activeCategory === cat.id ? 'active' : ''}`}
               onClick={() => handleCategoryClick(cat.id)}
             >
-              <img src={cat.image} alt={cat.name} />
+              <div className="cat-img-wrap">
+                {cat.image === 'more_icon' ? (
+                  <i className="ph-fill ph-dots-three" style={{fontSize: '28px', color: '#666'}}></i>
+                ) : (
+                  <img src={cat.image} alt={cat.name} />
+                )}
+              </div>
               <h4>{cat.name}</h4>
             </div>
           ))}
@@ -170,15 +186,21 @@ export default function Home() {
         <div className="products">
           {products.map(product => {
             const cartItem = cart.find(item => item.id === product.id);
+            const mrp = product.mrp || (product.price + Math.floor(product.price * 0.2));
             return (
               <div className="card" key={product.id}>
-                <img src={product.image} alt={product.name} />
+                <div className="card-img-wrap">
+                  <img src={product.image} alt={product.name} />
+                </div>
                 <h3>{product.name}</h3>
-                <p>{product.weight}</p>
+                <p className="weight">{product.weight}</p>
                 <div className="price-container">
-                  <div className="price">₹{product.price}</div>
+                  <div className="price-info">
+                    <span className="price">₹{product.price}</span>
+                    <span className="mrp">₹{mrp}</span>
+                  </div>
                   {!cartItem ? (
-                    <button className="buy" onClick={() => addToCart(product)}>+</button>
+                    <button className="buy" onClick={() => addToCart(product)}><i className="ph ph-plus"></i></button>
                   ) : (
                     <div className="qty-control">
                       <button className="qty-btn" onClick={() => updateQuantity(product.id, -1)}>-</button>

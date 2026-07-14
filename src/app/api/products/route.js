@@ -1,16 +1,16 @@
 import { NextResponse } from 'next/server';
 
 const products = [
-  // Vegetables (Daily Life)
-  { id: 'v1', categoryId: 'vegetables', name: 'Organic Tomato', weight: '1 Kg', price: 60, image: 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337' },
-  { id: 'v2', categoryId: 'vegetables', name: 'Fresh Onion', weight: '1 Kg', price: 40, image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb' },
-  { id: 'v3', categoryId: 'vegetables', name: 'Potato', weight: '1 Kg', price: 35, image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655' },
-  { id: 'v4', categoryId: 'vegetables', name: 'Fresh Carrots', weight: '500 gm', price: 50, image: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37' },
-  { id: 'v5', categoryId: 'vegetables', name: 'Organic Spinach (Palak)', weight: '250 gm', price: 30, image: 'https://images.unsplash.com/photo-1622205313162-be1d5712a43c' },
+  // Vegetables
+  { id: 'v1', categoryId: 'vegetables', name: 'Fresh Tomato', weight: '1 kg', price: 60, mrp: 80, image: 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337' },
+  { id: 'v2', categoryId: 'vegetables', name: 'Fresh Onion', weight: '1 Kg', price: 40, mrp: 50, image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb' },
+  { id: 'v3', categoryId: 'vegetables', name: 'Potato', weight: '1 Kg', price: 35, mrp: 45, image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655' },
+  { id: 'v4', categoryId: 'vegetables', name: 'Fresh Carrots', weight: '500 gm', price: 50, mrp: 65, image: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37' },
+  { id: 'v5', categoryId: 'vegetables', name: 'Fresh Spinach', weight: '250 gm', price: 40, mrp: 60, image: 'https://images.unsplash.com/photo-1622205313162-be1d5712a43c' },
   { id: 'v6', categoryId: 'vegetables', name: 'Green Chilli', weight: '100 gm', price: 15, image: 'https://images.unsplash.com/photo-1587550186762-297746401089' },
 
   // Dairy Items (Daily Life)
-  { id: 'd1', categoryId: 'dairy', name: 'Fresh Cow Milk', weight: '1 Ltr', price: 65, image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150' },
+  { id: 'd1', categoryId: 'dairy', name: 'Milk (Toned)', weight: '1 Ltr', price: 65, mrp: 80, image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150' },
   { id: 'd2', categoryId: 'dairy', name: 'Fresh Paneer', weight: '200 gm', price: 85, image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc0' },
   { id: 'd3', categoryId: 'dairy', name: 'Fresh Curd (Dahi)', weight: '400 gm', price: 40, image: 'https://images.unsplash.com/photo-1628189679244-c68e82ef4518' },
   { id: 'd4', categoryId: 'dairy', name: 'Desi Cow Ghee', weight: '500 ml', price: 450, image: 'https://images.unsplash.com/photo-1587049352847-4d4b1273661b' },
@@ -24,8 +24,8 @@ const products = [
   { id: 'f5', categoryId: 'fruits', name: 'Pomegranate (Anaar)', weight: '1 Kg', price: 150, image: 'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec' },
 
   // Kirana Store Items
-  { id: 'k1', categoryId: 'kirana', name: 'Premium Basmati Rice', weight: '5 Kg', price: 550, image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c' },
-  { id: 'k2', categoryId: 'kirana', name: 'Toor Dal (Arhar)', weight: '1 Kg', price: 160, image: 'https://images.unsplash.com/photo-1585996025115-467406a6b5a3' },
+  { id: 'k1', categoryId: 'grains', name: 'Basmati Rice', weight: '1 kg', price: 120, mrp: 150, image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c' },
+  { id: 'k2', categoryId: 'pulses', name: 'Toor Dal (Arhar)', weight: '1 Kg', price: 160, mrp: 180, image: 'https://images.unsplash.com/photo-1585996025115-467406a6b5a3' },
   { id: 'k3', categoryId: 'kirana', name: 'Chana Dal', weight: '1 Kg', price: 120, image: 'https://images.unsplash.com/photo-1515543904379-3d757afe72e4' },
   { id: 'k4', categoryId: 'kirana', name: 'Aashirvaad Atta', weight: '10 Kg', price: 450, image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff' },
   { id: 'k5', categoryId: 'kirana', name: 'Tata Salt', weight: '1 Kg', price: 25, image: 'https://images.unsplash.com/photo-1628268909376-e8c5dfdc010f' },
